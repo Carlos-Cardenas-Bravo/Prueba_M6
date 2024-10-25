@@ -1,0 +1,26 @@
+<% if notice %>
+  <p class="notification is-success"><%= notice %></p>
+<% end %>
+
+<%= render @job_offer %>
+
+<div class="buttons">
+  <!-- Solo los usuarios normal_user podrán ver el botón para postular -->
+  <% if current_user.normal_user? %>
+    <% unless current_user.job_applications.exists?(job_offer: @job_offer) %>
+      <%= button_to 'Postular a esta oferta', job_offer_job_applications_path(@job_offer), method: :post, class: "button is-primary" %>
+    <% else %>
+      <p class="has-text-danger">Ya has postulado a esta oferta.</p>
+    <% end %>
+  <% end %>
+
+  <!-- Solo los administradores pueden editar o eliminar la oferta -->
+  <% if current_user.admin? %>
+    <%= link_to "Editar esta oferta", edit_job_offer_path(@job_offer), class: "button is-link" %>
+    <%= button_to "Eliminar esta oferta", @job_offer, method: :delete, class: "button is-danger" %>
+  <% end %>
+
+  <!-- Link para volver a la lista de ofertas laborales -->
+  <%= link_to "Volver a las ofertas laborales", job_offers_path, class: "button is-light" %>
+</div>
+

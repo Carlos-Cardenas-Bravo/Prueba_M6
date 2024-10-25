@@ -1,0 +1,39 @@
+<%= form_with(model: job_offer, local: true, html: { class: 'box' }) do |form| %>
+  <% if job_offer.errors.any? %>
+    <div class="notification is-danger">
+      <h2 class="title is-4">
+        <%= pluralize(job_offer.errors.count, "error") %> prohibieron que esta oferta laboral se guardara:
+      </h2>
+
+      <ul>
+        <% job_offer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title, class: "label" %>
+    <div class="control">
+      <%= form.text_field :title, class: "input", placeholder: "Título de la oferta laboral" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, class: "label" %>
+    <div class="control">
+      <%= form.text_area :description, class: "textarea", placeholder: "Descripción de la oferta laboral" %>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= form.submit 'Crear/Actualizar Oferta', class: 'button is-primary' %>
+    </div>
+    <div class="control">
+      <%= link_to 'Cancelar', job_offers_path, class: 'button is-light' %>
+    </div>
+  </div>
+<% end %>
+

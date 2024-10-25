@@ -1,0 +1,105 @@
+<h2 class="title is-4">Editar Perfil</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "box", multipart: true }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <!-- Name -->
+  <div class="field">
+    <%= f.label :name, class: "label" %>
+    <div class="control">
+      <%= f.text_field :name, class: "input" %>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="field">
+    <%= f.label :email, class: "label" %>
+    <div class="control">
+      <%= f.email_field :email, class: "input", autofocus: true, autocomplete: "email" %>
+    </div>
+  </div>
+
+  <!-- Confirmable notice -->
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div class="notification is-warning">
+      Esperando confirmación para: <%= resource.unconfirmed_email %>
+    </div>
+  <% end %>
+
+  <!-- Experience Years -->
+  <div class="field">
+    <%= f.label :experience_years, class: "label" %>
+    <div class="control">
+      <%= f.number_field :experience_years, class: "input" %>
+    </div>
+  </div>
+
+  <!-- Education Level -->
+  <div class="field">
+    <%= f.label :education_level, class: "label" %>
+    <div class="control">
+      <%= f.text_field :education_level, class: "input" %>
+    </div>
+  </div>
+
+  <!-- Previous Positions -->
+  <div class="field">
+    <%= f.label :previous_positions, class: "label" %>
+    <div class="control">
+      <%= f.text_area :previous_positions, class: "textarea" %>
+    </div>
+  </div>
+
+  <!-- Password -->
+  <div class="field">
+    <%= f.label :password, class: "label" %> <i>(déjalo en blanco si no quieres cambiarlo)</i>
+    <div class="control">
+      <%= f.password_field :password, class: "input", autocomplete: "new-password" %>
+    </div>
+    <% if @minimum_password_length %>
+      <p class="help is-info"><%= @minimum_password_length %> caracteres mínimo</p>
+    <% end %>
+  </div>
+
+  <!-- Password confirmation -->
+  <div class="field">
+    <%= f.label :password_confirmation, class: "label" %>
+    <div class="control">
+      <%= f.password_field :password_confirmation, class: "input", autocomplete: "new-password" %>
+    </div>
+  </div>
+
+  <!-- Current password -->
+  <div class="field">
+    <%= f.label :current_password, class: "label" %> <i>(necesitamos tu contraseña actual para confirmar los cambios)</i>
+    <div class="control">
+      <%= f.password_field :current_password, class: "input", autocomplete: "current-password" %>
+    </div>
+  </div>
+
+  <!-- Image Profile Upload -->
+  <div class="field">
+    <%= f.label :image_profile, 'Subir imagen de perfil', class: "label" %>
+    <div class="control">
+      <%= f.file_field :image_profile, class: "input" %>
+    </div>
+  </div>
+
+  <!-- Update button -->
+  <div class="field">
+    <div class="control">
+      <%= f.submit "Actualizar", class: "button is-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<!-- Cancel account -->
+<h3 class="title is-5">Cancelar mi cuenta</h3>
+
+<div class="notification is-danger">
+  ¿No estás contento?
+  <%= button_to "Cancelar mi cuenta", registration_path(resource_name), class: "button is-danger", data: { confirm: "¿Estás seguro?", turbo_confirm: "¿Estás seguro?" }, method: :delete %>
+</div>
+
+<!-- Back link -->
+<%= link_to "Volver", :back, class: "button is-light" %>

@@ -1,0 +1,26 @@
+<div class="container" style="width: 100%; height: 100vh; position: relative; padding: 0;">
+    <!-- Imagen de fondo (2cequipo.jpg) -->
+    <figure class="image is-4by3">
+        <%= image_tag '2cequipo.jpg', alt: 'Equipo', style: 'width: 100%; height: 100%; object-fit: cover;' %>
+    </figure>
+
+    <!-- Imagen logo (logo2.png) centrada encima de la imagen de fondo -->
+    <div style="position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+      <figure class="image is-128x128">
+        <%= image_tag 'logo2.png', alt: 'Logo' %>
+      </figure>
+    </div>
+
+    <!-- Texto "Crece con nosotros" sobre la imagen logo -->
+    <div style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);">
+      <h1 class="title has-text-black" style="font-size: 42px; margin-top: 10px; text-shadow: 2px 2px 5px white, -2px -2px 5px white;">CRECE CON NOSOTROS</h1>
+    </div>
+
+    <!-- Botón para ingresar (en el tercio inferior de la imagen) -->
+    <div style="position: absolute; bottom: 10%; left: 50%; transform: translate(-50%, -50%);">
+      <%= link_to 'Ingresar a la página', new_user_session_path, class: 'button is-primary is-large' %>
+    </div>
+</div>
+
+
+

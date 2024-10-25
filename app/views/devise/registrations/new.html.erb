@@ -1,0 +1,76 @@
+<h2 class="title">Registrarse</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "box" }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <!-- Campo para el nombre -->
+  <div class="field">
+    <label class="label"><%= f.label :name %></label>
+    <div class="control">
+      <%= f.text_field :name, class: "input", autocomplete: "name" %>
+    </div>
+  </div>
+
+  <!-- Campo para el email -->
+  <div class="field">
+    <label class="label"><%= f.label :email %></label>
+    <div class="control">
+      <%= f.email_field :email, class: "input", autofocus: true, autocomplete: "email" %>
+    </div>
+  </div>
+
+  <!-- Campo para la contraseña -->
+  <div class="field">
+    <label class="label"><%= f.label :password %></label>
+    <% if @minimum_password_length %>
+      <p class="help">(<%= @minimum_password_length %> caracteres mínimo)</p>
+    <% end %>
+    <div class="control">
+      <%= f.password_field :password, class: "input", autocomplete: "new-password" %>
+    </div>
+  </div>
+
+  <!-- Campo para la confirmación de la contraseña -->
+  <div class="field">
+    <label class="label"><%= f.label :password_confirmation %></label>
+    <div class="control">
+      <%= f.password_field :password_confirmation, class: "input", autocomplete: "new-password" %>
+    </div>
+  </div>
+
+  <!-- Campo para subir la imagen de perfil -->
+  <div class="field">
+    <label class="label"><%= f.label :profile_image, "Subir Foto de Perfil" %></label>
+    <div class="file has-name is-boxed">
+      <label class="file-label">
+        <%= f.file_field :profile_image, class: "file-input", id: "image-upload" %>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">Seleccionar imagen...</span>
+        </span>
+        <span class="file-name" id="file-name">No se ha seleccionado ninguna imagen</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Botón de enviar -->
+  <div class="field is-grouped">
+    <div class="control">
+      <%= f.submit "Registrarse", class: "button is-primary" %>
+    </div>
+    <div class="control">
+      <%= link_to "Cancelar", root_path, class: "button is-light" %>
+    </div>
+  </div>
+<% end %>
+
+
+<!-- Script para mostrar el nombre del archivo de imagen seleccionado -->
+<script>
+  document.getElementById('image-upload').addEventListener('change', function() {
+    var fileName = this.files[0].name;
+    document.getElementById('file-name').textContent = fileName;
+  });
+</script>

@@ -1,0 +1,56 @@
+<h2 class="title is-4">Editar Usuario</h2>
+
+<%= form_for([:admin, @user], html: { class: 'box' }) do |f| %>
+  <!-- Mostrar errores si los hay -->
+  <%= render 'shared/error_messages', object: @user %>
+
+  <!-- Campo para el nombre -->
+  <div class="field">
+    <%= f.label :name, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :name, class: 'input' %>
+    </div>
+  </div>
+
+  <!-- Campo para el email -->
+  <div class="field">
+    <%= f.label :email, class: 'label' %>
+    <div class="control">
+      <%= f.email_field :email, class: 'input' %>
+    </div>
+  </div>
+
+  <!-- Campo para la contraseña (opcional) -->
+  <div class="field">
+    <%= f.label :password, class: 'label' %>
+    <div class="control">
+      <%= f.password_field :password, class: 'input', placeholder: 'Dejar en blanco si no quieres cambiar la contraseña' %>
+    </div>
+  </div>
+
+  <!-- Campo para confirmar la contraseña (opcional) -->
+  <div class="field">
+    <%= f.label :password_confirmation, class: 'label' %>
+    <div class="control">
+      <%= f.password_field :password_confirmation, class: 'input' %>
+    </div>
+  </div>
+
+  <!-- Campo para el rol (solo admin puede cambiarlo) -->
+  <div class="field">
+    <%= f.label :role, class: 'label' %>
+    <div class="control">
+      <%= f.select :role, User.roles.keys.map { |role| [role.humanize, role] }, {}, class: 'input' %>
+    </div>
+  </div>
+
+  <!-- Botón de guardar -->
+  <div class="field">
+    <div class="control">
+      <%= f.submit 'Guardar Cambios', class: 'button is-primary' %>
+    </div>
+  </div>
+<% end %>
+
+<!-- Link para volver al listado de usuarios -->
+<%= link_to 'Volver al listado de usuarios', admin_users_path, class: 'button is-light' %>

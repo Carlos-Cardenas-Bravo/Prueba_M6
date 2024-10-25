@@ -1,0 +1,74 @@
+<h2 class="title is-3">Nuevo Registro</h2>
+
+<div class="box">
+  <%= form_for(@user, url: user_registration_path, html: { class: "box" }) do |f| %>
+
+    <!-- Campo para el nombre -->
+    <div class="field">
+      <%= f.label :name, class: 'label' %>
+      <div class="control">
+        <%= f.text_field :name, class: 'input', placeholder: 'Nombre' %>
+      </div>
+      <% if @user.errors[:name].any? %>
+        <p class="help is-danger"><%= @user.errors[:name].first %></p>
+      <% end %>
+    </div>
+
+    <!-- Campo para el correo electrónico -->
+    <div class="field">
+      <%= f.label :email, class: 'label' %>
+      <div class="control">
+        <%= f.email_field :email, class: 'input', placeholder: 'Correo electrónico' %>
+      </div>
+      <% if @user.errors[:email].any? %>
+        <p class="help is-danger"><%= @user.errors[:email].first %></p>
+      <% end %>
+    </div>
+
+    <!-- Campo para la contraseña -->
+    <div class="field">
+      <%= f.label :password, class: 'label' %>
+      <div class="control">
+        <%= f.password_field :password, class: 'input', placeholder: 'Contraseña' %>
+      </div>
+      <% if @user.errors[:password].any? %>
+        <p class="help is-danger"><%= @user.errors[:password].first %></p>
+      <% end %>
+    </div>
+
+    <!-- Campo para confirmar la contraseña -->
+    <div class="field">
+      <%= f.label :password_confirmation, class: 'label' %>
+      <div class="control">
+        <%= f.password_field :password_confirmation, class: 'input', placeholder: 'Confirmar Contraseña' %>
+      </div>
+      <% if @user.errors[:password_confirmation].any? %>
+        <p class="help is-danger"><%= @user.errors[:password_confirmation].first %></p>
+      <% end %>
+    </div>
+
+    <!-- Campo para el rol -->
+    <div class="field">
+      <%= f.label :role, class: 'label' %>
+      <div class="control">
+        <div class="select">
+          <%= f.select :role, User.roles.keys.map { |role| [role.humanize, role] } %>
+        </div>
+      </div>
+      <% if @user.errors[:role].any? %>
+        <p class="help is-danger"><%= @user.errors[:role].first %></p>
+      <% end %>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="field is-grouped">
+      <div class="control">
+        <%= f.submit 'Registrar Usuario', class: 'button is-primary' %>
+      </div>
+      <div class="control">
+        <%= link_to 'Cancelar', root_path, class: 'button is-light' %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

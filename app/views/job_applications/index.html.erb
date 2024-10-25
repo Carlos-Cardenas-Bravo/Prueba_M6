@@ -1,0 +1,41 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Job applications" %>
+
+<h1>Mis Postulaciones</h1>
+
+<div id="job_applications">
+  <% @job_applications.each do |job_application| %>
+    <%= render job_application %>
+    <p>
+      <%= link_to "Show this job application", job_application %>
+    </p>
+  <% end %>
+</div>
+
+<h2>Mis Postulaciones</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Oferta</th>
+      <th>Status</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @job_applications.each do |job_application| %>
+      <tr>
+        <td><%= link_to job_application.job_offer.title, job_offer_path(job_application.job_offer) %></td>
+        <td><%= job_application.status %></td>
+        <td>
+          <%= link_to 'Ver', job_offer_job_application_path(job_application.job_offer, job_application) %> |
+          <%= link_to 'Cancelar Postulación', job_offer_job_application_path(job_application.job_offer, job_application), method: :delete, data: { confirm: '¿Estás seguro?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to "New job application", new_job_application_path %>
