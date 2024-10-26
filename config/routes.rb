@@ -1,4 +1,4 @@
-# rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
+# rubocop:disable Layout/SpaceInsideArrayLiteralBrackets, Lint/Syntax
 Rails.application.routes.draw do
   root "welcome#index"
 
@@ -8,12 +8,15 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    registrations: "devise/registrations",
-    sessions: "users/sessions"
+    # registrations: "devise/registrations",
+    sessions: "users/sessions",
+    registrations: "users/registrations"  # Usar el controlador personalizado para registros
   }
 
   namespace :admin do
-    resources :users, only: [:index, :edit, :update, :destroy]
+    resources :users, only: [:index, :edit, :update, :destroy, :show] do
+      get "new_application", on: :member
+    end
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
@@ -21,4 +24,4 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 end
 
-# rubocop:enable Layout/SpaceInsideArrayLiteralBrackets
+# rubocop:enable Layout/SpaceInsideArrayLiteralBrackets, Lint/Syntax

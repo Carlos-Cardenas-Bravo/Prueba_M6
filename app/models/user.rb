@@ -22,23 +22,28 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :job_applications, dependent: :destroy
+  has_one_attached :image_profile
+
   enum role: { normal_user: 0, admin: 1 }
+
+  # Método para ajustar el tamaño de la imagen de perfil
+  def resized_profile_image
+    image_profile.variant(resize_to_fill: [150, 150]).processed if image_profile.attached?
+  end
 
   # Establecer el valor por defecto del role
   after_initialize :set_default_role, if: :new_record?
 
-  has_many :job_applications, dependent: :destroy
-  has_one_attached :image_profile
+  # Validaciones para el registro
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :email, presence: true
 
-# Validaciones para el registro
-validates :name, presence: true, length: { maximum: 50 }
-validates :email, presence: true
-
-# Validaciones condicionales para la actualización del perfil
-validates :experience_years, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  # Validaciones condicionales para la actualización del perfil
+  validates :experience_years, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :education_level, presence: true, on: :update
 
-private
+  private
 
   def set_default_role
     self.role ||= :normal_user

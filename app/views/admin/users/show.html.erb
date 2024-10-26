@@ -1,0 +1,35 @@
+<h2 class="title is-4">Perfil de <%= @user.name %></h2>
+
+<div class="box">
+    <!-- Mostrar la imagen de perfil si existe, de lo contrario mostrar la imagen por defecto -->
+    <figure class="image is-128x128">
+        <% if @user.image_profile.attached? %>
+            <%= image_tag @user.resized_profile_image, class: "is-rounded" %>
+        <% else %>
+            <%= image_tag "default_profile.png", class: "image is-128x128 is-rounded" %>
+        <% end %>
+    </figure>
+
+    <p><strong>Nombre:</strong> <%= @user.name %></p>
+    <p><strong>Email:</strong> <%= @user.email %></p>
+    <p><strong>Años de experiencia:</strong> <%= @user.experience_years %></p>
+    <p><strong>Nivel educativo:</strong> <%= @user.education_level %></p>
+    <p><strong>Posiciones previas:</strong> <%= @user.previous_positions %></p>
+</div>
+
+<h3 class="title is-5">Postulaciones a Ofertas de Trabajo</h3>
+
+<div class="box">
+  <% if @job_applications.any? %>
+    <ul>
+      <% @job_applications.each do |application| %>
+        <li><%= link_to application.job_offer.title, job_offer_path(application.job_offer) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Este usuario aún no ha postulado a ninguna oferta.</p>
+  <% end %>
+</div>
+
+<%= link_to 'Volver al listado de usuarios', admin_users_path, class: 'button is-light' %>
+

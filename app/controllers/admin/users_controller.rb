@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_if_admin
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.where(role: :normal_user)
@@ -22,7 +23,7 @@ class Admin::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to admin_users_path, notice: "Usuario actualizado correctamente."
     else
-      flash.now[:alert] = 'Hubo un error al actualizar el usuario.'
+      flash.now[:alert] = "Hubo un error al actualizar el usuario."
       render :edit
     end
   end
@@ -33,7 +34,19 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path, notice: "Usuario eliminado correctamente."
   end
 
+  def show
+    @user = User.find(params[:id])
+    @job_applications = @user.job_applications.where(checked: false)
+
+    # Marcar las postulaciones como revisadas
+    @job_applications.update_all(checked: true)
+  end
+
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def check_if_admin
     unless current_user.admin?

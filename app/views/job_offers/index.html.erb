@@ -20,6 +20,10 @@
 
             <div class="buttons">
               <%= link_to "Ver esta oferta", job_offer, class: "button is-link" %>
+              <!-- Mostrar 'Postulado' si el usuario ya ha postulado a esta oferta -->
+              <% if current_user.job_applications.exists?(job_offer: job_offer) %>
+                <span class="tag is-success">Postulado</span>
+              <% end %>
             </div>
           </div>
         </div>
@@ -27,6 +31,7 @@
     </div>
   </div>
 </section>
+
 
 
 
