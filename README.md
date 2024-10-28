@@ -40,10 +40,13 @@ Se ocupó el framework de css Bulma para darle estilo a la aplicación.
 ## Capturas
 
 Diagrama Relacional de la App
+
 ![Diagrama Relacional de la App](diagrama.PNG)
 
 Carga en S3
+
 ![Carga en S3](S3_001.png)
+
 ## Versiones Utilizadas
 
 Para tener una funcionalidad completa de la aplicación debes tener las siguientes versiones de los softwares utilizados.
