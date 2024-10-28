@@ -78,6 +78,16 @@
 
   <!-- Image Profile -->
   <div class="field">
+    <%= f.label :image_profile, 'Imagen de Perfil Actual', class: "label" %>
+    <div class="control">
+      <% if @user.image_profile.attached? %>
+        <%= image_tag @user.image_profile.variant(resize_to_fill: [200, 200]) %>
+      <% else %>
+        <%= image_tag 'default_profile.png', size: "200x200" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="field">
     <%= f.label :image_profile, 'Subir imagen de perfil', class: "label" %>
     <div class="control">
       <%= f.file_field :image_profile, class: "input" %>
