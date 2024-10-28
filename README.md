@@ -34,9 +34,9 @@ Como se resguardan las claves por medio de Figaro para probar la aplicación deb
 
 Se ocupó el framework de css Bulma para darle estilo a la aplicación.
 
-![Diagrama Relacional de la App](public/diagrama.png)
+![Diagrama Relacional de la App](diagrama.PNG)
 
-![Carga en S3](public/S3.pdf)
+![Carga en S3](S3.pdf)
 
 
 
