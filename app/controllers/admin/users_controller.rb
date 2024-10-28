@@ -36,10 +36,14 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @job_applications = @user.job_applications.where(checked: false)
+    # Traer todas las postulaciones de este usuario
+    @job_applications = @user.job_applications
 
-    # Marcar las postulaciones como revisadas
-    @job_applications.update_all(checked: true)
+    # Obtener la nueva postulación (la que tiene checked: false)
+    new_application = @job_applications.where(checked: false).order(created_at: :desc).first
+
+    # Marcar solo la nueva postulación como revisada
+    new_application.update(checked: true) if new_application
   end
 
   private

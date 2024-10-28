@@ -7,15 +7,28 @@ Rails.application.routes.draw do
     resources :job_applications, only: [:create, :index, :show, :destroy]
   end
 
+  # Rutas de Devise para usuarios normales (perfil, edición, etc.)
   devise_for :users, controllers: {
-    # registrations: "devise/registrations",
-    sessions: "users/sessions",
-    registrations: "users/registrations"  # Usar el controlador personalizado para registros
+    registrations: "users/registrations", # Controlador para usuarios normales
+    sessions: "users/sessions"
   }
 
-  namespace :admin do
-    resources :users, only: [:index, :edit, :update, :destroy, :show] do
-      get "new_application", on: :member
+  resources :users, only: [] do
+    member do
+      get 'profile', to: 'users#profile'
+    end
+  end
+
+  # Rutas para el administrador para crear usuarios y gestionar el resto
+  devise_scope :user do
+    namespace :admin do
+      # resources :registrations, only: [:new, :create], controller: "registrations" # Administrador crea usuarios
+      # resources :users, only: [:index, :edit, :update, :destroy, :show] do
+      #   get "new_application", on: :member
+      resources :users, only: [:index, :edit, :update, :destroy, :show]
+      get "registrations/new", to: "registrations#new", as: :new_user_registration
+      post "registrations", to: "registrations#create", as: :user_registration
+      # end
     end
   end
 

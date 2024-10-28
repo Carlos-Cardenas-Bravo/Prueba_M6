@@ -17,6 +17,7 @@
           <div class="buttons">
             <%= link_to 'Editar', edit_admin_user_path(user), class: 'button is-small is-link' %>
             <%= button_to 'Eliminar', admin_user_path(user), method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'button is-small is-danger' %>
+            <%= link_to 'Postulaciones', admin_user_path(user), class: 'button is-small is-info' %>
             <% if user.job_applications.exists?(checked: false) %>
               <%= link_to 'Nueva Postulación', admin_user_path(user), class: 'button is-small is-warning' %>
             <% end %>

@@ -3,7 +3,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "box", multipart: true }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <!-- Name -->
+  <!-- Nombre -->
   <div class="field">
     <%= f.label :name, class: "label" %>
     <div class="control">
@@ -19,14 +19,13 @@
     </div>
   </div>
 
-  <!-- Confirmable notice -->
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div class="notification is-warning">
       Esperando confirmación para: <%= resource.unconfirmed_email %>
     </div>
   <% end %>
 
-  <!-- Experience Years -->
+  <!-- Experiencia -->
   <div class="field">
     <%= f.label :experience_years, class: "label" %>
     <div class="control">
@@ -34,7 +33,7 @@
     </div>
   </div>
 
-  <!-- Education Level -->
+  <!-- Nivel de Educación -->
   <div class="field">
     <%= f.label :education_level, class: "label" %>
     <div class="control">
@@ -42,7 +41,7 @@
     </div>
   </div>
 
-  <!-- Previous Positions -->
+  <!-- Cargo anterior -->
   <div class="field">
     <%= f.label :previous_positions, class: "label" %>
     <div class="control">
@@ -77,7 +76,7 @@
     </div>
   </div>
 
-  <!-- Image Profile Upload -->
+  <!-- Image Profile -->
   <div class="field">
     <%= f.label :image_profile, 'Subir imagen de perfil', class: "label" %>
     <div class="control">
@@ -85,7 +84,6 @@
     </div>
   </div>
 
-  <!-- Update button -->
   <div class="field">
     <div class="control">
       <%= f.submit "Actualizar", class: "button is-primary" %>

@@ -20,6 +20,10 @@
           <% if current_user.admin? %>
             <a class="navbar-item" href="<%= new_job_offer_path %>">Publicar Oferta de Trabajo</a>
           <% end %>
+          <!-- Mostrar "Postulaciones realizadas" solo si es un usuario normal -->
+          <% if current_user.normal_user? %>
+            <%= link_to 'Postulaciones realizadas', profile_user_path(current_user), class: 'navbar-item' %>
+          <% end %>
         <% end %>
       </div>
 
@@ -40,7 +44,7 @@
 
               <!-- Solo mostrar "Registrar" si es administrador -->
               <% if current_user.admin? %>
-                <%= link_to 'Registrar Usuario', new_user_registration_path, class: 'button is-primary' %>
+                <%= link_to 'Registrar Usuario', admin_new_user_registration_path, class: 'button is-primary' %>
               <% end %>
 
               <%= button_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: 'button is-light' %>

@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :authenticate_user!
+
   protected
 
   # Permitir que los usuarios actualicen su perfil sin requerir la contraseña
@@ -14,4 +16,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(resource)
     job_offers_path  # Redirige al listado de ofertas laborales
   end
+
+  # Parámetros permitidos para la actualización del perfil
+  def account_update_params
+    params.require(:user).permit(
+      :email,
+      :name,
+      :experience_years,
+      :education_level,
+      :previous_positions,
+      :password,
+      :password_confirmation,
+      :current_password,
+      :image_profile
+    )
+  end
+
 end

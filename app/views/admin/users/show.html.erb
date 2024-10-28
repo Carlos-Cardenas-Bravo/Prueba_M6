@@ -23,7 +23,16 @@
   <% if @job_applications.any? %>
     <ul>
       <% @job_applications.each do |application| %>
-        <li><%= link_to application.job_offer.title, job_offer_path(application.job_offer) %></li>
+        <!-- Si la postulación es nueva (checked = false), aplicamos una clase para resaltarla -->
+        <li class="<%= 'has-background-warning' unless application.checked %>" style="padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+          <p>
+            <%= link_to application.job_offer.title, job_offer_path(application.job_offer), class: "is-link" %>
+            <!-- Mostrar una etiqueta de 'Nueva' si la postulación es nueva -->
+            <% unless application.checked %>
+              <span class="tag is-danger">Nueva</span>
+            <% end %>
+          </p>
+        </li>
       <% end %>
     </ul>
   <% else %>

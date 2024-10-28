@@ -1,0 +1,40 @@
+<h2 class="title is-4">Mi Perfil</h2>
+
+<!-- Mostrar la imagen de perfil -->
+<div class="field">
+  <figure class="image is-128x128">
+    <% if @user.image_profile.attached? %>
+      <%= image_tag @user.image_profile.variant(resize_to_fill: [128, 128]), class: "is-rounded" %>
+    <% else %>
+      <p>No hay imagen de perfil</p>
+    <% end %>
+  </figure>
+</div>
+
+<br>
+
+<p><strong>Nombre:</strong> <%= @user.name %></p>
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>Años de experiencia:</strong> <%= @user.experience_years %></p>
+<p><strong>Nivel de educación:</strong> <%= @user.education_level %></p>
+<p><strong>Posiciones anteriores:</strong> <%= @user.previous_positions %></p>
+
+<br><br>
+
+<h3 class="title is-5">Postulaciones realizadas</h3>
+<table class="table is-fullwidth is-striped">
+  <thead>
+    <tr>
+      <th>Oferta</th>
+      <th>Fecha de postulación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @job_applications.each do |application| %>
+      <tr>
+        <td><%= link_to application.job_offer.title, job_offer_path(application.job_offer) %></td>
+        <td><%= application.created_at.strftime("%d/%m/%Y") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

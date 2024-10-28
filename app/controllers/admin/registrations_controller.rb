@@ -2,6 +2,8 @@ class Admin::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!
   before_action :check_if_admin
   skip_before_action :require_no_authentication, only: [:new, :create]
+  skip_before_action :set_minimum_password_length, only: [:new, :create]
+
 
   # GET /users/sign_up
   def new
@@ -13,8 +15,10 @@ class Admin::RegistrationsController < Devise::RegistrationsController
     @user = User.new(sign_up_params)
 
     if @user.save
-      flash[:notice] = "Usuario creado exitosamente. ¿Deseas agregar otro usuario?"
-      redirect_to new_user_registration_path # Redirige nuevamente al formulario de registro
+      flash[:notice] = "Usuario creado exitosamente."
+      # redirect_to new_user_registration_path # Redirige nuevamente al formulario de registro
+      # redirect_to admin_new_user_registration_path
+      redirect_to admin_users_path  # Redirige al listado de usuarios después de la creación
     else
       render :new
     end
