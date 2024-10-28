@@ -1,11 +1,11 @@
-<h2 class="title is-4">Editar Perfil</h2>
+<h2 class="title is-4">Actualizar Perfil</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "box", multipart: true }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <!-- Nombre -->
   <div class="field">
-    <%= f.label :name, class: "label" %>
+    <%= f.label :name, 'Nombre', class: "label" %>
     <div class="control">
       <%= f.text_field :name, class: "input" %>
     </div>
@@ -27,7 +27,7 @@
 
   <!-- Experiencia -->
   <div class="field">
-    <%= f.label :experience_years, class: "label" %>
+    <%= f.label :experience_years, 'Experiencia (años)', class: "label" %>
     <div class="control">
       <%= f.number_field :experience_years, class: "input" %>
     </div>
@@ -35,7 +35,7 @@
 
   <!-- Nivel de Educación -->
   <div class="field">
-    <%= f.label :education_level, class: "label" %>
+    <%= f.label :education_level, 'Nivel educativo', class: "label" %>
     <div class="control">
       <%= f.text_field :education_level, class: "input" %>
     </div>
@@ -43,7 +43,7 @@
 
   <!-- Cargo anterior -->
   <div class="field">
-    <%= f.label :previous_positions, class: "label" %>
+    <%= f.label :previous_positions, 'Cargo Actual', class: "label" %>
     <div class="control">
       <%= f.text_area :previous_positions, class: "textarea" %>
     </div>
@@ -60,9 +60,9 @@
     <% end %>
   </div>
 
-  <!-- Password confirmation -->
+  <!-- Confirmación de Password -->
   <div class="field">
-    <%= f.label :password_confirmation, class: "label" %>
+    <%= f.label :password_confirmation, 'Confirma tu password', class: "label" %>
     <div class="control">
       <%= f.password_field :password_confirmation, class: "input", autocomplete: "new-password" %>
     </div>
@@ -70,7 +70,7 @@
 
   <!-- Current password -->
   <div class="field">
-    <%= f.label :current_password, class: "label" %> <i>(necesitamos tu contraseña actual para confirmar los cambios)</i>
+    <%= f.label :current_password, 'Password actual', class: "label" %> <i>(necesitamos tu contraseña actual para confirmar los cambios)</i>
     <div class="control">
       <%= f.password_field :current_password, class: "input", autocomplete: "current-password" %>
     </div>
@@ -95,8 +95,7 @@
 <h3 class="title is-5">Cancelar mi cuenta</h3>
 
 <div class="notification is-danger">
-  ¿No estás contento?
-  <%= button_to "Cancelar mi cuenta", registration_path(resource_name), class: "button is-danger", data: { confirm: "¿Estás seguro?", turbo_confirm: "¿Estás seguro?" }, method: :delete %>
+  <%= button_to "Eliminar mi cuenta", registration_path(resource_name), class: "button is-danger", data: { confirm: "¿Estás seguro?", turbo_confirm: "¿Estás seguro?" }, method: :delete %>
 </div>
 
 <!-- Back link -->
