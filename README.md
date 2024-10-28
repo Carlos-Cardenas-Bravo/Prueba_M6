@@ -36,7 +36,7 @@ Se ocupó el framework de css Bulma para darle estilo a la aplicación.
 
 ![Diagrama Relacional de la App](diagrama.PNG)
 
-![Carga en S3](S3.pdf)
+![Carga en S3](S3_001.png)
 
 
 
