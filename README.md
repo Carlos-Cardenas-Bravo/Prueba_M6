@@ -14,7 +14,7 @@ Rails
 - [@Carlos-Cardenas-Bravo](https://github.com/Carlos-Cardenas-Bravo)
 
 
-## Lógica utilizada
+## Lógica Utilizada
 
 Se generó una app según lo indicado del tipo Ofertas de trabajos y aplicación a estas.
 
@@ -37,6 +37,21 @@ Se ocupó el framework de css Bulma para darle estilo a la aplicación.
 
 
 
+## Running Tests
+
+Se implementaron los siguientes test con Minitest:
+
+- Actualización de perfil de usuario: verifica que un usuario normal pueda actualizar su perfil correctamente.
+- Creación de ofertas de trabajo: asegura que solo los administradores puedan crear nuevas ofertas de trabajo.
+- Postulación a ofertas: valida que solo los usuarios registrados puedan postularse a ofertas laborales.
+- Creación de usuarios por el administrador: comprueba que solo el administrador pueda crear nuevos usuarios.
+- Visualización de nuevas postulaciones: garantiza que el administrador pueda ver y gestionar nuevas postulaciones pendientes.
+
+```bash
+  rails test
+```
+
+
 ## Capturas
 
 Diagrama Relacional de la App
@@ -46,7 +61,6 @@ Diagrama Relacional de la App
 Carga en S3
 
 ![Carga en S3](S3_001.png)
-
 ## Versiones Utilizadas
 
 Para tener una funcionalidad completa de la aplicación debes tener las siguientes versiones de los softwares utilizados.
@@ -58,3 +72,4 @@ Para tener una funcionalidad completa de la aplicación debes tener las siguient
 
 ## 🚀 About Me
 I'm a human apprentice
+
