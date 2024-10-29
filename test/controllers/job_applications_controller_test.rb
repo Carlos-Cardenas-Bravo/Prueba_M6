@@ -1,48 +1,26 @@
 require "test_helper"
 
 class JobApplicationsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
-    @job_application = job_applications(:one)
+    @normal_user = users(:normal_user1) # Usuario normal desde los fixtures
+    @job_offer = job_offers(:analista_datos) # Oferta de trabajo desde los fixtures
   end
 
-  test "should get index" do
-    get job_applications_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_job_application_url
-    assert_response :success
-  end
-
-  test "should create job_application" do
-    assert_difference("JobApplication.count") do
-      post job_applications_url, params: { job_application: { job_offer_id: @job_application.job_offer_id, status: @job_application.status, user_id: @job_application.user_id } }
+  test "registered user can apply to a job offer" do
+    sign_in @normal_user
+    assert_difference('JobApplication.count', 1) do
+      post job_offer_job_applications_path(@job_offer), params: { job_application: { job_offer_id: @job_offer.id } }
     end
-
-    assert_redirected_to job_application_url(JobApplication.last)
+    assert_redirected_to job_offer_path(@job_offer)
   end
 
-  test "should show job_application" do
-    get job_application_url(@job_application)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_job_application_url(@job_application)
-    assert_response :success
-  end
-
-  test "should update job_application" do
-    patch job_application_url(@job_application), params: { job_application: { job_offer_id: @job_application.job_offer_id, status: @job_application.status, user_id: @job_application.user_id } }
-    assert_redirected_to job_application_url(@job_application)
-  end
-
-  test "should destroy job_application" do
-    assert_difference("JobApplication.count", -1) do
-      delete job_application_url(@job_application)
+  test "unregistered user cannot apply to a job offer" do
+    assert_no_difference('JobApplication.count') do
+      post job_offer_job_applications_path(@job_offer), params: { job_application: { job_offer_id: @job_offer.id } }
     end
-
-    assert_redirected_to job_applications_url
+    assert_redirected_to new_user_session_path
   end
 end
+

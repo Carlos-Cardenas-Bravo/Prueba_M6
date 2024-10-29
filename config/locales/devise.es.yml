@@ -1,0 +1,4 @@
+es:
+  devise:
+    registrations:
+      updated: "Tu cuenta ha sido actualizada correctamente."

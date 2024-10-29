@@ -11,12 +11,15 @@
 #  checked      :boolean          default(FALSE)
 #
 
-one:
-  user: one
-  job_offer: one
-  status: MyString
+application_one:
+  id: 1
+  user_id: 2 # Usuario normal con id 2
+  job_offer_id: 1 # Oferta de "Analista de datos"
+  checked: false
 
-two:
-  user: two
-  job_offer: two
-  status: MyString
+application_two:
+  id: 2
+  user_id: 3 # Usuario normal con id 3
+  job_offer_id: 2 # Oferta de "Administrador de Obra"
+  checked: true
+

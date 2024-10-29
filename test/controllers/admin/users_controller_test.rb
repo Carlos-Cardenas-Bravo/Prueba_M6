@@ -1,23 +1,18 @@
 require "test_helper"
 
 class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get admin_users_index_url
-    assert_response :success
+  include Devise::Test::IntegrationHelpers
+
+  setup do
+    @admin = users(:admin)
+    @normal_user = users(:normal_user1)
+    @job_offer = job_offers(:analista_datos)
   end
 
-  test "should get edit" do
-    get admin_users_edit_url
-    assert_response :success
-  end
-
-  test "should get update" do
-    get admin_users_update_url
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get admin_users_destroy_url
-    assert_response :success
+  test "admin should see new application link for unchecked applications" do
+    sign_in @admin
+    @normal_user.job_applications.create(job_offer: @job_offer, checked: false)
+    get admin_users_path
+    assert_select 'a', text: 'Nueva Postulación'
   end
 end

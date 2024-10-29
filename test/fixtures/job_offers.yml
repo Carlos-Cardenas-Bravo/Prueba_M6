@@ -9,10 +9,17 @@
 #  updated_at  :datetime         not null
 #
 
-one:
-  title: MyString
-  description: MyText
+analista_datos:
+  id: 1
+  title: 'Analista de datos'
+  description: 'Recopilar y depurar datos para análisis y tendencias.'
 
-two:
-  title: MyString
-  description: MyText
+administrador_obra:
+  id: 2
+  title: 'Administrador de Obra'
+  description: 'Coordinación de aspectos administrativos en obras de construcción.'
+
+gerente_finanzas:
+  id: 3
+  title: 'Gerente de Finanzas'
+  description: 'Supervisar decisiones de inversión y crear informes financieros.'
